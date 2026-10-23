@@ -1,0 +1,20 @@
+<!--We add code for our index / home page for our authors-->
+<h2>Search Authors</h2>
+<!--We create a form that has action on authors and its method is getting since it gets all authors from the database-->
+<form action = "/authors" method = "GET">
+    <!--we create the first label for our input fiels-->
+    <label>Name</label>
+    <!--We put our input field for our name-->
+    <!--we add the name search condition as the value of our input field since we will search for the authors from the database by their names.-->
+    <input type = "text" name = "name" value = "<%= searchOptions.name %>">
+    <!--Then we add our search button-->
+    <button type ="submit">Search</button>
+</form>
+<br>
+<!--we need to display our authors using a for-each loop below the form after searching for them-->
+<% authors.forEach(author => { %>
+    <div>
+        <%= author.name %> <!--This means that for each author that we get to search for we will iterate through all the authors we got and get the one-->
+        <!--searched for and display that one-->
+    </div>
+<% }) %>
