@@ -1,0 +1,48 @@
+<!--We will put the inputs of our bookb's pages in this file-->
+<!--We will add inputs basing on our books database model-->
+<div>
+    <label>Name</label> <!--This is the label of the input field for the book title-->
+    <input type ="text" name = "title" value = "<%= book.title %>"> 
+</div>
+<!--The input is for the name of the books and we get it using our database model-->
+<div>
+    <!--select box for choosing the author of the book-->
+    <label>Author</label>
+    <select name = "author">
+        <!--We iterate through the authors in the authors list in the database-->
+        <% authors.forEach( author => { %>
+            <!--for each author we encounter we check to see if their id is the same as the book's author id i.e; the author is linked to the book-->
+            <% if(author.id === book.author){ %>
+                <!--if yes this author gets a selected tag in the dropdown menu-->
+                <option selected  value = "<%= author.id %>">
+                    <%= author.name %>
+                </option>
+            <% } else { %>
+                <!--if no we just show the first author in the dropdown menu-->
+                <option  value = "<%= author.id %>">
+                    <%= author.name %>
+                </option>
+            <% } %>
+        <% }) %>
+    </select>
+</div>
+<!--We create our publish date input with type date and then we split our date and separate it from the time-->
+<div>
+    <label>Publish Date</label>
+    <input type ="date" name = "publishDate" value = "<%=book.publishDate == null? '' : book.publishDate.toISOString().split('T')[0]%>">
+</div>
+<!--We create our page count input.-->
+<div>
+    <label>Page Count</label>
+    <input type="number" name = "pageCount" min = "1" value = "<%=book.pageCount %>">
+</div>
+<!--We create an input for our cover image for our book-->
+<div>
+    <label>Cover Image</label>
+    <input type = "file" name = "cover" class = "filepond">
+</div>
+<!--Description input field-->
+<div>
+    <label>Description</label>
+    <textarea name = "description"><%= book.description%></textarea>
+</div>

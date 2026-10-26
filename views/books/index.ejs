@@ -1,0 +1,35 @@
+<!--We add code for our index / home page for our books-->
+<h2>Search Books</h2>
+<!--We create a form that has action on books index page and its method is getting since it gets all books from the database-->
+<form action = "/books" method = "GET">
+    <div>
+        <!--we create the first label for our input fields-->
+        <label>Title</label>
+        <!--We put our input field for our book title-->
+        <!--we add the name search condition as the value of our input field since we will search for the books from the database by their titles.-->
+        <input type = "text" name = "title" value = "<%= searchOptions.title %>">
+    </div>
+    <div>
+        <!--input for our published after date we will use this as search option condition as well-->
+        <label>Published After</label>
+        <!--input field; type: date-->
+        <input type = "date" name = "publishedAfter" value = "<%= searchOptions.publishedAfter %>">
+    </div>
+    <div>
+        <!--input for published before date search option-->
+        <label>Published Before</label>
+        <input type = "date" name = "publishedBefore" value = "<%= searchOptions.publishedBefore %>">
+    </div>
+    <div>
+        <!--Then we add our search button-->
+        <button type ="submit">Search</button>
+    </div>
+</form>
+<br>
+<!--we need to display our authors using a for-each loop below the form after searching for them-->
+<% books.forEach(book => { %>
+    <div>
+        <!--we display each book by its image after iterating through an array of books from the database-->
+        <img height = "150" width = "100" src = "<%=book.coverImagePath%>">
+    </div>
+<% }) %>
