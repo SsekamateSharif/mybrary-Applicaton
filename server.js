@@ -9,6 +9,8 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts'); // this will aid with our app views 
 // we import our body-parser library to our server 
 const bodyParser = require('body-parser');
+// we import the method-override library
+const methodOverride = require('method-override');
 // use express to make an express app that wil run our server
 const app = express();
 // we then have to set up our view engine 
@@ -21,6 +23,8 @@ app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 // tell our app to use the body parser library 
 app.use(bodyParser.urlencoded({limit: '10 mb', extended: false}));
+// tell our app to use the method-override library
+app.use(methodOverride('_method'));
 // tell the app to use public files from our public folder that we will create 
 app.use(express.static('public')); // tells the app to use files from the public folder 
 // we let our app to use json data

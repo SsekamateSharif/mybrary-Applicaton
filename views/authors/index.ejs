@@ -17,4 +17,11 @@
         <%= author.name %> <!--This means that for each author that we get to search for we will iterate through all the authors we got and get the one-->
         <!--searched for and display that one-->
     </div>
+    <!--We add the show/edit/delete links for each author on our index/home page-->
+    <!--Show Author link-->
+    <a href = "/authors/<%=author.id%>">View</a>
+    <!--Edit Author link-->
+    <a href = "/authors/<%=author.id%>/edit">Edit</a>
+    <!--Delete button-->
+    <%- include('../partials/deleteForm', {url: `/authors/${author.id}`})%>
 <% }) %>
