@@ -8,6 +8,7 @@ const Book = require(`../models/book`);
 // we also import our authors database model into our books route file
 const Author = require(`../models/author`);
 const req = require('express/lib/request');
+const book = require('../models/book');
 //we use express to create a router 
 const router = express.Router();
 
@@ -70,33 +71,122 @@ router.post('/', async (req, res) => {
     saveCover(book, req.body.cover) // we save our book cover 
     try{
         const newBook = await book.save(); // we save the book that we just created 
-        // res.redirect(`books/${newBook.id}`);
-        res.redirect('books'); // for now
+        res.redirect(`books/${newBook.id}`);
     }catch{
         renderNewPage(res, book, true); // hasError = true;
     }
 });
 
-// we create a function that renders the new book page 
-async function renderNewPage(res, book, hasError = false){
+// now we need to create the show/edit/update/delete page routes 
+// now we create the show route 
+router.get('/:id', async (req, res) => {
     try{
-        // we first get the authors from the database 
+        // we find a book from the database by their id.
+        const book = await Book.findById(req.params.id).populate('author').exec();
+        // then we render out the book's show page 
+        res.render('books/show', {book: book});
+    }catch{
+        res.redirect('/'); // we redirect to the homepage 
+    };
+});   
+
+// edit book route 
+router.get('/:id/edit', async (req, res) =>{ 
+    try{
+        // we get a book by its id from the database 
+        const book = await Book.findById(req.params.id);
+        // we will create a renderEditPage function so we call it to render our edit page for us
+        renderEditPage(res, book);
+    }catch{
+        // if there is an error
+        res.redirect('/'); // redirect the user to the home page 
+    }
+});
+
+// updating book route
+router.put('/:id', async (req,res) =>{
+    // we create a variable for storing our books 
+    let book;
+    try{
+        // we get the book from the database by their id and store them in the database variable
+        book = await Book.findById(req.params.id);
+        // now we list the properties that we would love to update when a user updates them 
+        book.title = req.body.title;
+        book.author = req.body.author;
+        book.publishDate = new Date(req.body.publishDate);
+        book.pageCount = req.body.pageCount;
+        book.description = req.body.description;
+        // we have to check if the user updated the cover image  then we have to save the new cover image 
+        if (req.body.cover != null && req.body.cover !== ''){
+            saveCover(book, req.body.cover);
+        }
+        // we have to save the book updates 
+        await book.save();
+        // then we redirect the user to the individual book's page 
+        res.redirect(`/books/${book.id}`);
+    }catch{
+        // we have to check if there is no book
+        if(book != null){
+            renderEditPage(res, book, true); // has an error in rendering page 
+        }else{
+            // redirect to the main home or index page
+            res.redirect('/');
+        }
+    }
+});
+
+// delete book route 
+router.delete('/:id', async (req, res) =>{
+    // we create a function for storing our book that we retrieve from the database 
+    let book;
+    try{
+        // we get the book by its id from the database 
+        book = await Book.findById(req.params.id);
+        // we delete the book from the database 
+        await book.deleteOne();
+        // then we redirect our users to the books home / index page 
+        res.redirect('/books');
+    }catch{
+        // we first check if there is a book found 
+        if(book != null){
+            res.render('books/show', {
+                book: book,
+                errorMessage: 'Could not remove the book'
+            });
+        }else{
+            // then we redirect the user to the home or index page 
+            res.redirect('/');
+        }
+    }
+})
+
+// we need to create our renderFormPage that will render our forms the edit and new page forms 
+async function renderFormPage(res,book, form, hasError = false){
+    try{
+        // we find all the authors from our database and store them in a variable
         const authors = await Author.find({});
-        // then we set the parameters to be rendered on the new page
+        // we initiate our parameters to display on our forms 
         const params = {
             authors: authors,
             book: book
         }
-        // we check if it has error
-        if (hasError){
-            params.errorMessage = 'Error Creating the book';
-        }
-        // if everything goes well we render the book's new page and we display our params on the page 
-        res.render('books/new', params);
+        // if there is an error
+        if(hasError) params.errorMessage = 'Error occured';
+        res.render(`books/${form}`, params); // if all good we render that form that we passed as a parameter 
     }catch{
-        // we redirect them to the books home or index page
-        res.redirect('books'); 
+        // redirect to the books index page
+        res.redirect('/books');
     }
+}
+
+// we create a function that renders the new book page using our renderFormPage function that we created above 
+async function renderNewPage(res, book, hasError = false){
+    renderFormPage(res, book, 'new', hasError);
+}
+
+// we create the renderEditPage function using the renderFormPage function that we just created 
+async function renderEditPage(res, book, hasError = false){
+    renderFormPage(res, book, 'edit', hasError); // we create the render edit page by calling the renderFormPage that we created 
 }
 
 // we create function that saves our book cover 

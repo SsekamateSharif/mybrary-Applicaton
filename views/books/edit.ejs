@@ -1,0 +1,12 @@
+<!--We will create our edit book page form here -->
+<!--Page title-->
+<h2>Edit Book</h2>
+<!--We then create the form-->
+<!--We override our request method using method overrid-->
+<form action = "/books/<%=book.id%>?_method=PUT" method = "POST" >
+    <!--We then include our _form_fields.ejs file in our new.ejs-->
+    <%- include('_form_fields') %> 
+    <!--We the create our links/buttons for canceling and submitting our form-->
+    <a href = "/books">Cancel</a> <!--This links to our books home page-->
+    <button type = "submit">Update</button> <!--This link is for updating our book-->
+</form>
