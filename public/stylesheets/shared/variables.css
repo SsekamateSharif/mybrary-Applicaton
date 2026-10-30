@@ -1,0 +1,7 @@
+/* we will add all our variables here*/
+/*hsl; hue-saturation-lightness*/
+:root{
+    --color-background-dark: hsl(200, 100%,8%);
+    --color-background-light: hsl(200,100%, 16%);
+    --color-text-light: hsl(200, 100%, 87%);
+}

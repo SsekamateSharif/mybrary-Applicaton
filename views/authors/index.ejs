@@ -1,5 +1,5 @@
 <!--We add code for our index / home page for our authors-->
-<h2>Search Authors</h2>
+<h2 class = "page-header">Search Authors</h2>
 <!--We create a form that has action on authors and its method is getting since it gets all authors from the database-->
 <form action = "/authors" method = "GET">
     <!--we create the first label for our input fields-->
@@ -18,10 +18,12 @@
         <!--searched for and display that one-->
     </div>
     <!--We add the show/edit/delete links for each author on our index/home page-->
-    <!--Show Author link-->
-    <a href = "/authors/<%=author.id%>">View</a>
-    <!--Edit Author link-->
-    <a href = "/authors/<%=author.id%>/edit">Edit</a>
-    <!--Delete button-->
-    <%- include('../partials/deleteForm', {url: `/authors/${author.id}`})%>
+    <div class = "btn-row">
+        <!--Show Author link-->
+        <a class ="btn btn-primary" href = "/authors/<%=author.id%>">View</a>
+        <!--Edit Author link-->
+        <a class ="btn btn-primary" href = "/authors/<%=author.id%>/edit">Edit</a>
+        <!--Delete button-->
+        <%- include('../partials/deleteForm', {url: `/authors/${author.id}`})%>
+    </div>
 <% }) %>

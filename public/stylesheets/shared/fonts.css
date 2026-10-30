@@ -1,0 +1,62 @@
+/* Here we will import our fonts give them font names for usage in our project */
+
+/* importing all the inter font types */
+@font-face{
+    src: url('/fonts/Inter_18pt-Bold.ttf');
+    font-family: 'Inter 18pt Bold';
+    font-weight: bold;
+}
+@font-face{
+    src: url('/fonts/Inter_24pt-Black.ttf');
+    font-family: 'Inter 24pt Black';
+    font-weight: normal;
+}
+@font-face{
+    src: url('/fonts/Inter_24pt-Bold.ttf');
+    font-family: 'Inter 24pt Bold';
+    font-weight: bold;
+}
+@font-face{
+    src: url('/fonts/Inter_24pt-ExtraBold.ttf');
+    font-family: 'Inter 24pt ExtraBold';
+    font-weight: bold;
+}
+
+/* importing all the Montserrat font types */
+@font-face{
+    src: url('/fonts/MontserratAlternates-Black.ttf');
+    font-family: 'MontserratAlternates-Black';
+    font-weight: normal;
+}
+@font-face{
+    src: url('/fonts/MontserratAlternates-Bold.ttf');
+    font-family: 'MontserratAlternates-Bold';
+    font-weight: bold;
+}
+@font-face{
+    src: url('/fonts/MontserratAlternates-Regular.ttf');
+    font-family: 'MontserratAlternates-Regular';
+    font-weight: normal;
+}
+
+/* now we import the PlayfairDisplay font types as well */
+@font-face{
+    src: url('/fonts/PlayfairDisplay-Black.ttf');
+    font-family: 'PlayfairDisplay-Black';
+    font-weight: normal;
+}
+@font-face{
+    src: url('/fonts/PlayfairDisplay-BlackItalic.ttf');
+    font-family: 'PlayfairDisplay-BlackItalic';
+    font-weight: normal;
+}
+@font-face{
+    src: url('/fonts/PlayfairDisplay-Bold.ttf');
+    font-family: 'PlayfairDisplay-Bold';
+    font-weight: bold;
+}
+@font-face{
+    src: url('/fonts/PlayfairDisplay-Regular.ttf');
+    font-family: 'PlayfairDisplay-Regular';
+    font-weight: normal;
+}

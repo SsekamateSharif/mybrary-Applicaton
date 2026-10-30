@@ -1,0 +1,37 @@
+/* here we will add the main css code for our application */
+/* import our fonts file here */
+@import 'shared/fonts.css';
+@import 'shared/variables.css';
+@import 'shared/header.css';
+@import 'shared/button.css';
+
+/* we define our root pseudo class */
+:root{
+    font-family: 'Inter 24pt Bold';
+    font-size: 20px;
+    /* we change our text color  we need to create a variable for it */
+    color: var(--color-text-light);
+}
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+/* we now work on the background or our app to create the linear gradient look of it */
+
+body{
+    background: linear-gradient(to right, var(--color-background-dark), var(--color-background-light));
+}
+/* we make containers to wrap all of our elements */
+.container{
+    max-width: 1200px;
+    margin: auto;
+    margin-bottom: 3rem;
+}
+.inner-container{
+    margin: 0 2rem;
+}
+/* for making our header and main page title abit larger*/
+.page-header{
+    font-size: 2rem;
+    font-weight: 500;
+}

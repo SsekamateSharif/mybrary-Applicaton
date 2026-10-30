@@ -1,0 +1,40 @@
+/* we will use this to design our header for our application*/
+/* we create a root psuedo element and we add our variables that we will use */
+:root{
+    --nav-title-font-size: 3rem;
+    --nav-title-font-weight: bold;
+    --nav-link-font-weight: 300;
+}
+.header-title{
+    color: var(--color-text-light);
+    text-decoration: none; /* this removes the underline text decoration */
+    font-size: var(--nav-title-font-size);
+    font-weight: var(--nav-title-font-weight);
+}
+.header-nav{
+    /*this designs the whole navigation bar for our application header */
+    display: flex; /* using flex-box centering*/
+    flex-wrap: wrap; /* the elements wrap to each other if the site space is reduced*/
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+.header-nav li{
+    list-style: none;
+}
+.header-link a{
+    text-decoration: none;
+    color: var(--color-text-light);
+    font-weight: var(--nav-link-font-weight);
+    padding: 1rem;
+}
+/*creating a hover effect for my navigation bar links*/
+.header-link a:hover{
+    color: white;
+}
+ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+}
