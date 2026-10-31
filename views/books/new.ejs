@@ -6,7 +6,9 @@
     <!--The method for our form has to be POST since we will use it to create a new book and action should be to our books home page-->
     <!--We then include our _form_fields.ejs file in our new.ejs-->
     <%- include('_form_fields') %> 
-    <!--We the create our links/buttons for canceling and submitting our form-->
-    <a href = "/books">Cancel</a> <!--This links to our books home page-->
-    <button type = "submit">Create</button>
+    <div class ="form-row form-row-end btn-row">
+        <!--We the create our links/buttons for canceling and submitting our form-->
+        <a class = "btn btn-danger" href = "/books">Cancel</a> <!--This links to our books home page-->
+        <button class = "btn btn-primary" type = "submit">Create</button>
+    </div>
 </form>

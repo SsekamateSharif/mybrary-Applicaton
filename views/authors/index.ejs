@@ -2,28 +2,40 @@
 <h2 class = "page-header">Search Authors</h2>
 <!--We create a form that has action on authors and its method is getting since it gets all authors from the database-->
 <form action = "/authors" method = "GET">
-    <!--we create the first label for our input fields-->
-    <label>Name</label>
-    <!--We put our input field for our name-->
-    <!--we add the name search condition as the value of our input field since we will search for the authors from the database by their names.-->
-    <input type = "text" name = "name" value = "<%= searchOptions.name %>">
-    <!--Then we add our search button-->
-    <button type ="submit">Search</button>
+    <div class = "form-row">
+        <div class = "form-item">
+            <!--we create the first label for our input fields-->
+            <label>Name</label>
+            <!--We put our input field for our name-->
+            <!--we add the name search condition as the value of our input field since we will search for the authors from the database by their names.-->
+            <input type = "text" name = "name" value = "<%= searchOptions.name %>">
+        </div>
+    </div>
+    <div class = "form-row form-row-end btn-row">
+        <!--Then we add our search button-->
+        <button class = "btn btn-primary" type ="submit">Search</button>
+    </div>
 </form>
 <br>
 <!--we need to display our authors using a for-each loop below the form after searching for them-->
 <% authors.forEach(author => { %>
-    <div>
-        <%= author.name %> <!--This means that for each author that we get to search for we will iterate through all the authors we got and get the one-->
-        <!--searched for and display that one-->
-    </div>
-    <!--We add the show/edit/delete links for each author on our index/home page-->
-    <div class = "btn-row">
-        <!--Show Author link-->
-        <a class ="btn btn-primary" href = "/authors/<%=author.id%>">View</a>
-        <!--Edit Author link-->
-        <a class ="btn btn-primary" href = "/authors/<%=author.id%>/edit">Edit</a>
-        <!--Delete button-->
-        <%- include('../partials/deleteForm', {url: `/authors/${author.id}`})%>
+    <div class = "form-row">
+        <div class = "form-item">
+            <div class = "author-name">
+                <%= author.name %> <!--This means that for each author that we get to search for we will iterate through all the authors we got and get the one-->
+                <!--searched for and display that one-->
+            </div>
+        </div>
+        <div class = "form-item">
+            <!--We add the show/edit/delete links for each author on our index/home page-->
+            <div class = "btn-row">
+                <!--Show Author link-->
+                <a class ="btn btn-primary" href = "/authors/<%=author.id%>">View</a>
+                <!--Edit Author link-->
+                <a class ="btn btn-primary" href = "/authors/<%=author.id%>/edit">Edit</a>
+                <!--Delete button-->
+                <%- include('../partials/deleteForm', {url: `/authors/${author.id}`})%>
+            </div>
+        </div>
     </div>
 <% }) %>

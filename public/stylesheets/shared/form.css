@@ -1,0 +1,130 @@
+/* here we will design our form elements*/
+:root{
+    --form-label-font-size: 1.2rem;
+    --form-input-background-color: hsl(200, 100%, 31%);
+    --form-input-border-color: hsl(200, 100%, 50%);
+    --form-input-border-color-light: hsl(200, 100%, 80%);
+}
+.form-row{
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+.form-item{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    flex-grow: 1; /* items share the available space in the flexbox container equally*/
+    flex-basis: 0;
+}
+.form-item:first-child{
+    margin-left: 0;
+}
+.form-item>label{
+    font-size: var(--form-label-font-size);
+    margin-bottom: 0.25rem;
+    margin-left: 0.25rem;
+}
+/* designing oyr input, selectbox and also text area */
+.form-item input, .form-item select, .form-item textarea{
+    height: 2rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--form-input-border-color);
+    background: var(--form-input-background-color);
+    color: var(--color-text-light);
+    font-size: 1rem;
+    font-weight: normal;
+    font-family: 'Inter 24pt Black';
+    outline: none;
+}
+/*input fields customisation when focused on with the cursor by the user*/
+.form-item input:focus, .form-item select:focus, .form-item textarea:focus{
+    border-color: var(--form-input-border-color-light)
+}
+
+/*text area customisation*/
+.form-item textarea{
+    height: 100%;
+    resize: none;
+}
+/*select box customisation*/
+.form-item select{
+    background: black;
+}
+.filepond--root{
+    width: 300px;
+    height: 300px;
+    font-family: 'Inter 24pt Black';
+    margin-bottom: 0;
+}
+.filepond--panel-root{
+    height: 300px;
+    background: var(--form-input-background-color);
+    border: 1px solid var(--form-input-border-color);
+}
+.filepond--drop-label{
+    color: var(--color-text-light);
+    font-size: inherit;
+}
+.form-row-end{
+    justify-content: flex-end;
+}
+.author-name{
+    font-size: 1.25rem;
+}
+.author-name:hover{
+    color: white;
+}
+.form-images{
+    display: flex;
+    flex-direction: row;
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+    justify-content: space-evenly;
+}
+.form-images:first-child{
+    margin-left: 0;
+}
+.form-item-date{
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;     
+    margin-top: 1rem;
+}
+.form-item-date input{
+    height: 2rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--form-input-border-color);
+    background: var(--form-input-background-color);
+    color: var(--color-text-light);
+    font-size: 1rem;
+    font-weight: normal;
+    font-family: 'Inter 24pt Black';
+    outline: none;
+}
+.form-item-date label{
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0.25rem;
+}
+.form-row-images{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+.Book-details{
+    display: flex;
+    margin-bottom: 2rem;
+    justify-content: flex-start;
+}
+.Book-details img{
+    margin-left: 0;
+}
+.Book-info{
+    padding: 0 3.5rem;
+}
+.info{
+    font-size: 1.15rem;
+    padding: 0.5rem;
+}

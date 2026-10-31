@@ -1,18 +1,24 @@
 <!--We will create our show author page here -->
 <!--Our heading should be the author name-->
 <h2 class = "page-header"><%=author.name%></h2>
-<!--We add our edit and delete links-->
-<a href = "/authors/<%=author.id%>/edit">Edit</a>
-<!--We include our deleteForm with its dynamic url-->
-<%-include('../partials/deleteForm', {url: `/authors/${author.id}`})%>
+<div class = "form-row btn-row">
+    <!--We add our edit and delete links-->
+    <a class = "btn btn-primary" href = "/authors/<%=author.id%>/edit">Edit</a>
+    <!--We include our deleteForm with its dynamic url-->
+    <%-include('../partials/deleteForm', {url: `/authors/${author.id}`})%>
+</div>
 <!--We check if an author has books associated with him or her and display them-->
 <% if(booksByAuthor.length > 0){%>
     <!--Heading for the books-->
     <h2>Books By Author</h2>
-    <% booksByAuthor.forEach(book => { %>
-        <!--For each book we find we display there images-->
-        <a href = "/books/<%=book.id%>">
-            <img height = "150" width = "100" src = "<%=book.coverImagePath%>">
-        </a>
-    <% }) %>
+    <div class = "form-row-images">
+        <% booksByAuthor.forEach(book => { %>
+            <div class = "form-images">
+                <!--For each book we find we display there images-->
+                <a href = "/books/<%=book.id%>">
+                    <img height = "150" width = "100" src = "<%=book.coverImagePath%>">
+                </a>
+            </div>
+        <% }) %>
+    </div>
 <% } %>

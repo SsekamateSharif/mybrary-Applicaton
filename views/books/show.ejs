@@ -1,24 +1,30 @@
 <h2 class = "page-header"><%=book.title%></h2> <!--The title for our book on our book show page-->
-<!--We display the image for the book cover-->
-<img height = "150" width = "100" src = "<%=book.coverImagePath%>">
-<br>
-<!--Then below here we have to display our book information-->
-<!--Author info-->
-<div>
-    Author: <%=book.author.name%>
+<div class = "Book-details">
+    <!--We display the image for the book cover-->
+    <img height = "150" width = "100" src = "<%=book.coverImagePath%>">
+    <br>
+    <div class = "Book-info">
+        <!--Then below here we have to display our book information-->
+        <!--Author info-->
+        <div class ="info">
+            Author: <%=book.author.name%>
+        </div class ="info">
+        <!--Publish date info-->
+        <div class ="info">
+            Publish Date: <%=book.publishDate.toDateString()%>
+        </div>
+        <!--Page count info-->
+        <div class ="info">
+            Page Count: <%=book.pageCount%>
+        </div>
+    </div>
 </div>
-<!--Publish date info-->
-<div>
-    Publish Date: <%=book.publishDate.toDateString()%>
+<div class = "form-row  btn-row">
+    <!--Edit link-->
+    <a class = "btn btn-primary" href = "/books/<%=book.id%>/edit">Edit</a>
+    <!--Delete Link-->
+    <!--We include the partials file for deleteForm-->
+    <%-include('../partials/deleteForm', {url: `/books/${book.id}` })%>
+    <!--View Author link-->
+    <a class = "btn btn-primary" href = "/authors/<%=book.author.id%>">View Author</a>
 </div>
-<!--Page count info-->
-<div>
-    Page Count: <%=book.pageCount%>
-</div>
-<!--Edit link-->
-<a href = "/books/<%=book.id%>/edit">Edit</a>
-<!--Delete Link-->
-<!--We include the partials file for deleteForm-->
-<%-include('../partials/deleteForm', {url: `/books/${book.id}` })%>
-<!--View Author link-->
-<a href = "/authors/<%=book.author.id%>">View Author</a>
