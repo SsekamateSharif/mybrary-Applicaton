@@ -191,7 +191,7 @@ async function renderEditPage(res, book, hasError = false){
 
 // we create function that saves our book cover 
 function saveCover(book, coverEncoded){
-    if(coverEncoded == null) return; // we check if there is any cover image information in the system 
+    if(coverEncoded == null || coverEncoded === '') return; // we check if there is any cover image information in the system 
     const cover = JSON.parse(coverEncoded); // if there is convert it from json form into js object form 
     if(cover != null && imageMimeTypes.includes(cover.type)){ // then check if it is of the desired image type
         book.coverImage = new Buffer.from(cover.data, 'base64'); // save it as the book cover image 
