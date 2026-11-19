@@ -13,13 +13,15 @@
             <li class = "header-link"><a href = "/books/new" >Add Books</a></li> <!--This links to the new books page-->
             <!--We add our borrower pages dropdown menu in our application header-->
             <li class = "header-link">
-                <!--Our main nav link-->
-                <a href = "/borrowers">Borrower Management</a>
-                <!--Then we create our other borrowers pages links-->
-                <ul>
-                    <li><a href="/borrowers">All Borrowers</a></li>
-                    <li><a href="/borrowers/new">Add Borrower</a></li>
-                </ul>
+                    <!--Our main nav link-->
+                    <a class="dropdown-btn">Borrower Management</a>
+                    <!--Then we create our other borrowers pages links-->
+                    <div class="dropdown">
+                        <ul class="menu">
+                            <li><a href="/borrowers">All Borrowers</a></li>
+                            <li><a href="/borrowers/new">Add Borrower</a></li>
+                        </ul>
+                    </div>
             </li>
         </ul>
     </nav>

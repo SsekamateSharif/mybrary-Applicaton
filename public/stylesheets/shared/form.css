@@ -131,3 +131,11 @@
 .approvedBy{
     max-width: 535px;
 }
+.book-img{
+    transition: transform 0.25s ease;
+    transition: box-shadow 0.25s ease;
+}
+.book-img:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 10px #00e5ff;
+}
