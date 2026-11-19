@@ -1,8 +1,8 @@
 // we register our filepond plugins
 FilePond.registerPlugin( // this tells filepond which additional plugins it will use 
+    FilePondPluginFileEncode,
     FilePondPluginImagePreview,
-    FilePondPluginImageResize,
-    FilePondPluginFileEncode
+    FilePondPluginImageResize
 );
 // we then change our filepond style
 FilePond.setOptions({

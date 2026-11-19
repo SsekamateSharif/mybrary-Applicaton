@@ -18,7 +18,6 @@ const authorSchema = new mongoose.Schema({
 authorSchema.pre('deleteOne', {document: true, query: false}, async function(){
     // getting the books related to the author from the database 
     const books = await Book.find({author: this.id}); 
-    
     // check if a book was found if so throw an error
     if(books.length > 0){
         throw new Error("The Author still has books");

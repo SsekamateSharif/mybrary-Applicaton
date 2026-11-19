@@ -1,0 +1,27 @@
+<h2 class="page-header">Search Borrower</h2> <!--This is the title for our borrower's index page-->
+<form action="/borrowers" method="GET">
+    <div class="form-row">
+        <div class="form-item">
+            <!--We need to add a label for the name input of the search input-->
+            <label>Full Name</label>
+            <input type="text" name="fullName" value="<%=searchOptions.fullName%>">
+        </div>
+    </div>
+
+    <div class="form-row form-row-end btn-row">
+        <!--We make our form submission button-->
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+</form>
+<br>
+<!--We have to display our borrowers below the form input field and search button-->
+<% borrowers.forEach(borrower => {%>
+    <!--We display the names of the borrowers with view, edit and delete buttons-->
+    <div class="form-row">
+        <div class="form-item">
+            <div class="author-name">
+               <%=borrower.fullName%>
+            </div>
+        </div>
+    </div>
+<% }) %>

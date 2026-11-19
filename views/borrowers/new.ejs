@@ -1,0 +1,13 @@
+<!--We make our borrower's new page title-->
+<h2 class="page-header">New Borrower</h2>
+<!--Create a form that submits our new borrower information to the database-->
+<form action = '/borrowers' method="POST">
+    <%-include('form_fields')%>
+    <!--We add our buttons for our form-->
+    <div class="form-row form-row-end btn-row">
+        <!--A cancel button that leads back to the home page -->
+        <a class="btn btn-danger" href = "/borrowers">Cancel</a>
+        <!--We create a button that submits our form-->
+        <button class="btn btn-primary" type = "submit">Create</button>
+    </div>
+</form>

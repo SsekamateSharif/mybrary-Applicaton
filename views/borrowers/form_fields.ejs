@@ -1,0 +1,133 @@
+<!--Here we create the layout structure of our form-->
+<div class = "form-row">
+    <div class = "form-item">
+        <label>Full Name</label>
+        <input type = "text" name = "fullName" value = "<%=borrower.fullName%>" placeholder="Enter Your Full Name">
+    </div>
+    <div class = "form-item">
+        <label>Email</label>
+        <input type = "email" name = "email" value = "<%=borrower.email%>" placeholder="Enter Your Email">
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-item">
+        <label>Phone Number</label>
+        <input type = "tel" name = "phoneNumber" value = "<%=borrower.phoneNumber%>" placeholder="Enter Your Phone Number">
+    </div>
+    <div class="form-item">
+        <label>Date Of Birth</label>
+        <input type = "date" name = "DateOfBirth" value = "<%=borrower.DateOfBirth == null? '' : borrower.DateOfBirth.toISOString().split('T')[0]%>">
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-item">
+        <label>Gender</label>
+        <!--We Will use a selectbox to create a dropdown selection input for our genders-->
+        <!--The We create our gender selectbox-->
+        <select name = "gender" required>
+            <!--If the user has not selected anything tell them to select and disable the selected option-->
+            <option value = '' selected disabled>Select Your Gender</option>
+            <!--We create the other select dropdown options-->
+            <option value ="Male">Male</option>
+            <option value ="Female">Female</option>
+            <option value ="Other">Other</option>
+            <option value ="Prefer not to say">Prefer not to say</option>
+        </select>
+    </div>
+    <div class="form-item">
+        <label>Address</label>
+        <input type = "text" name ="address" value = "<%=borrower.address%>" placeholder="Enter Your Address">
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-item">
+        <!--We create a dropdown select box for our id types for our borrowers-->
+        <label>iD Type</label>
+        <!--We create a select dropdown menu for our id types-->
+        <select name ="idType" required>
+            <!--If the user has not selected anything-->
+            <option value ='' selected disabled>Select You iD Type</option>
+            <option value ="National Identity Card">National Identity Card</option>
+            <option value ="Passport">Passport</option>
+            <option value ="Driving Licence">Driving Licence</option>
+            <option value ="Residence Permit">Residence Permit</option>
+            <option value ="Student ID Card">Student ID Card</option>
+            <option value ="Military ID">Military ID</option>
+        </select>
+    </div>
+
+    <div class="form-item">
+        <!--We create an input for the iD Number-->
+        <label>iD Number</label>
+        <input type ="text" name = "idNumber" value = "<%=borrower.idNumber%>" placeholder="Enter Your iD Number">
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-item">
+        <!--We create an input for the id issurer-->
+        <label>iD Issuer</label>
+        <input type = "text" name = "idIssuer" value = "<%=borrower.idIssuer%>">
+    </div>
+    <div class="form-item">
+        <!--We create an input for the id image upload-->
+        <label>iD Image</label>
+        <input type="file" name = "idImage" class = "filepond">
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-item">
+        <!--Book Borrowed input field-->
+        <label>Book Borrowed</label>
+        <!--We need to create a select box for the books borrowed-->
+        <select name = "bookBorrowed">
+            <% books.forEach( book =>{%>
+                <!--We iterate through the books we get from our database-->
+                <% if(book.id === borrowing.bookBorrowed){%>
+                    <option selected value ="<%=book.id%>">
+                        <%=book.title%>
+                    </option>
+                <% } else{%>
+                    <option value="<%=book.id%>">
+                        <%=book.title%>
+                    </option>
+                <% } %>
+
+            <%})%>
+        </select>
+    </div>
+    <div class="form-item">
+        <!--Borrow date input-->
+        <label>Borrowing Date</label>
+        <input type="date" name ="borrowDate" value="<%=borrowing.borrowDate == null?'':borrowing.borrowDate.toISOString().split('T')[0]%>">
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-item">
+        <!--Due Date input-->
+        <label>Due Date</label>
+        <input type="date" name="dueDate" value="<%=borrowing.dueDate == null? '': borrowing.dueDate.toISOString().split('T')[0]%>">
+    </div>
+    <div class="form-item">
+        <!--We add an input for the created at date-->
+        <label>Created At</label>
+        <input type="date" name="createdAt" value="<%=borrower.createdAt == null? '': borrower.createdAt.toISOString().split('T')[0]%>">
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-item">
+        <label>Return Date</label>
+        <input type="date" name="returnDate" value="<%=borrowing.returnDate == null? '':borrowing.returnDate.toISOString().split('T')[0] %>">
+    </div>
+    <div class="form-item approvedBy">
+        <!--Approved By input-->
+        <label>Approved By</label>
+        <input type="text" name="approvedBy" value="<%=borrowing.approvedBy%>">
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-item approvedBy">
+        <label>Status</label>
+        <input type="text" name="status" value="<%=borrowing.status%>">
+    </div>
+</div>

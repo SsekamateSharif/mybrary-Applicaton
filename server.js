@@ -15,14 +15,14 @@ const methodOverride = require('method-override');
 const app = express();
 // we then have to set up our view engine 
 app.set('view engine', 'ejs'); // this will also aid in our app views by converting ejs templates into understandable html for our system 
-// we then set the origin of our views
+// we then set the origin of our views for our application 
 app.set('views', __dirname + '/views'); // our views will be coming from the views folder 
-// we then need to hookup the express layouts 
+// we then need to hookup the express layouts for our views 
 app.set('layout', 'layouts/layout'); 
 // enable our server to use express layouts 
 app.use(expressLayouts);
 // tell our app to use the body parser library 
-app.use(bodyParser.urlencoded({limit: '10 mb', extended: false}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: false}));
 // tell our app to use the method-override library
 app.use(methodOverride('_method'));
 // tell the app to use public files from our public folder that we will create 
@@ -35,12 +35,16 @@ const authorRouter = require(`./routes/authors`);
 const indexRouter = require(`./routes/index`); // import the exported router from this directory.
 // we import the book router here in our server 
 const bookRouter = require(`./routes/books`);
+// we import our borrower's router 
+const borrowerRouter = require(`./routes/borrowers`);
 // tell our app to use that router 
 app.use('/', indexRouter);  // for the main page routes 
 // tell our app to use it
 app.use('/authors', authorRouter);
 // we tell our app to use our book router 
 app.use('/books', bookRouter);
+// we tell our app to listen to requests from our /borrowers router 
+app.use('/borrowers', borrowerRouter);
 // we make our app to listen for requests on port 3000
 app.listen(3000, () =>{console.log("server is running on port 3000.")});
 
