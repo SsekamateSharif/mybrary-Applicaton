@@ -1,0 +1,57 @@
+<h2 class="page-header"><%=borrower.fullName%></h2> <!--our borrower show page title-->
+<!--We add the details that we want to see on our borrowers show page-->
+<div class="Book-details">
+    <div class="imgs">
+        <div class="form-item">
+            <!--Id image-->
+            <img class="book-img id-img" height="450" width="300" src="<%=borrower.idImagePath%>">
+        </div>
+        <br>
+        <div class="form-item borrowedBook-img">
+            <img class="book-img" height="400" width="300" src="<%=borrowing.bookBorrowed.coverImagePath%>">
+        </div>
+    </div>
+
+    <div class="Book-info">
+        <div class="info">
+            Full Name: <%=borrower.fullName%>
+        </div>
+        <div class="info">
+            Email: <%=borrower.email%>
+        </div>
+        <div class="info">
+            Phone Number: <%=borrower.phoneNumber%>
+        </div>
+        <div class="info">
+            Date Of Birth: <%=borrower.DateOfBirth.toISOString().split('T')[0]%>
+        </div>
+        <div class="info">
+            Gender: <%=borrower.gender%>
+        </div>
+        <div class="info">
+            Address: <%=borrower.address%>
+        </div>
+        <div class="info">
+            iD Type: <%=borrower.idType%>
+        </div>
+        <div class="info">
+            iD Number: <%=borrower.idNumber%>
+        </div>
+        <div class="info">
+            iD Issuer: <%=borrower.idIssuer%>
+        </div>
+        <div class="info">
+            Book Borrowed: <%=borrowing.bookBorrowed.title%>
+        </div>
+        <div class="info">
+            Borrowed Date: <%=borrowing.borrowDate.toISOString().split('T')[0]%>
+        </div>
+        <div class="info">
+            Due Date: <%=borrowing.dueDate.toISOString().split('T')[0]%>
+        </div>
+    </div>
+</div>
+    <div class="btn-row form-row-end">
+        <a class="btn btn-primary" href="/borrowers/<%=borrower.id%>/edit">Edit</a>
+        <%-include('../partials/deleteForm', {url: `/borrowers/${borrower.id}`})%>
+    </div>

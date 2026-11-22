@@ -127,5 +127,133 @@ function SaveIdImage(borrower, idEncoded){
         borrower.idImageType = id.type;
     };
 }
+
+// we need to build the show , edit, update and delete routes for the borrowers 
+
+// show borrower route 
+router.get('/:id', async (req, res) =>{
+    // we use an id since we are going to get a specific borrower from the database and show them to the user
+    try{
+        const borrower = await Borrower.findById(req.params.id);
+        const borrowing = await Borrowing.findOne({borrower: req.params.id}).populate('borrower').populate('bookBorrowed').exec();
+ 
+        // we render our show page 
+        res.render('borrowers/show', {
+            borrower: borrower,
+            borrowing: borrowing
+        });
+    }catch(err){
+        console.log(err);
+        res.redirect('/borrowers');
+    } 
+});
+
+// edit page router for a borrower 
+router.get('/:id/edit', async(req, res)=>{
+    // renders a specific borrowers edit page so that they can be updated 
+    // first get the borrower by their id from the database 
+    try{
+        const borrower = await Borrower.findById(req.params.id);
+        const books = await Book.find();
+        const borrowing = await Borrowing.find();
+
+        // then we render our edit page for our user 
+        // we are rendering the edit.ejs view file from our views folder and this is its directory borrowers/edit
+        res.render(`borrowers/edit`, {
+            borrower: borrower,
+            books: books,
+            borrowing: borrowing
+        });
+    }catch{
+        // if an error occurs 
+        res.redirect('/borrowers'); // redirect to the borrowers home page 
+    }
+});
+
+// update route 
+router.put('/:id', async (req,res)=>{
+    // here we will implement our borrower updating 
+    let borrower; // here we will store the borrower that we will retrieve from the database 
+    let borrowing;
+    try{
+        // we get our borrower that we want to update from the database by their id 
+        borrower = await Borrower.findById(req.params.id); 
+        borrowing = await Borrowing.findOne({borrower: req.params.id}); // we find a borrowing whose borrower's id matches the id of our borrower 
+        // we use findOne but not find since it returns objects but not strings and we can easily access our properties of our 
+        // database schema 
+        // we implement the changes that the user might want to make according to our properties 
+        borrower.fullname = req.body.fullname;
+        borrower.email = req.body.email;
+        borrower.phoneNumber = req.body.phoneNumber;
+        borrower.DateOfBirth = req.body. DateOfBirth;
+        borrower.gender = req.body.gender;
+        borrower.address = req.body.address;
+        borrower.idType = req.body.idType;
+        borrower.idNumber = req.body.idNumber;
+        borrower.idIssuer = req.body.idIssuer;
+        // we check if the user has changed the id image 
+        if(req.body.idImage != null && req.body.idImage !== ''){
+            // we save the new image of the id uploaded by the user 
+            SaveIdImage(borrower, req.body.idImage);
+        }
+        borrowing.bookBorrowed = req.body.bookBorrowed;
+        borrowing.borrowDate = req.body.borrowDate;
+        borrowing.dueDate = req.body.dueDate;
+        borrower.createdAt = req.body.createdAt;
+        borrowing.returnDate = req.body.returnDate;
+        borrowing.approvedBy = req.body.approvedBy;
+        borrowing.status = req.body.status;
+
+        // now we save our new changes to the database 
+
+        await borrower.save();
+        await borrowing.save();
+
+        // after saving our changes we render the borrowers show page 
+        res.redirect(`/borrowers/${borrower.id}`);
+
+    }catch(err){
+        console.log(err);
+        // we render an error on the edit page
+        const books = await Book.find({});
+        res.render('borrowers/edit', {
+            books: books,
+            borrower: borrower,
+            borrowing: borrowing,
+            errorMessage:'Error Updating The Borrower'
+        }) 
+    }
+});
+
+// delete borrower route 
+router.delete('/:id', async (req, res)=>{
+    // we implement the delete action of our borrowers in this router
+    let borrower;
+    let borrowing;
+    try{
+        // we first find our borrower 
+        borrower = await Borrower.findById(req.params.id);
+        // we also find the borrowing associated to this borrower 
+        borrowing = await Borrowing.findOne({borrower:  req.params.id}); // we use findOne since we need it in Js Object form
+        // we find a borrowing whose borrower's object id is the same as our borrowers id 
+        // this means the borrower links to the borrowing 
+
+        // then we implement the deleting of the borrower and the borrowing they are linked to.
+        await borrower.deleteOne();
+        await borrowing.deleteOne();
+
+        // we delete the borrower and also delete the borrowing that they have associated with in order not to live any redundant 
+        // borrowings with out any borrowers they have linked to. 
+
+        // then we render the borrowers index page 
+        res.redirect('/borrowers');
+    }catch{
+        if(borrower == null || borrowing == null){
+            res.redirect('/');
+        }else{
+            res.redirect(`/borrowers/${borrower.id}`);
+        }
+    }
+});
 // we export the router for usage in our server file 
-module.exports = router;
+module.exports = router;  

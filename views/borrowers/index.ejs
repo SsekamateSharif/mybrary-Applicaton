@@ -19,11 +19,20 @@
 <!--We have to display our borrowers below the form input field and search button-->
 <% borrowers.forEach(borrower => {%>
     <!--We display the names of the borrowers with view, edit and delete buttons-->
-    <div class="form-row">
+    <div class="form-row borrowers">
         <div class="form-item">
             <div class="author-name">
                <%=borrower.fullName%>
             </div>
         </div>
+            <!--We add our view edit and delete borrower buttons-->
+            <div class="form-item">
+                <div class="btn-row form-row-end">
+                    <a class="btn btn-primary" href="/borrowers/<%=borrower.id%>">View</a>
+                    <a class="btn btn-primary" href="/borrowers/<%=borrower.id%>/edit">Edit</a>
+                    <%-include(`../partials/deleteForm`, {url: `/borrowers/${borrower.id}`})%>
+                    <!--We used a dynamic url for our delete button form-->
+                </div>
+            </div>
     </div>
 <% }) %>

@@ -1,0 +1,11 @@
+<h2 class="page-header">Edit Borrower</h2> <!--Title of our edit page-->
+<form action="/borrowers/<%=borrower.id%>?_method=PUT" method="POST">
+    <!--We did a method override on the edit form page where by we send a post request to our server instead of a post request-->
+    <!--We include our form input fields views files-->
+    <%-include('form_fields')%> 
+    <!--We then create our buttons-->
+    <div class="form-row form-row-end btn-row">
+        <a class="btn btn-primary" href="/borrowers">Cancel</a>
+        <button class="btn btn-danger" type="submit">Update</button>
+    </div>
+</form>
