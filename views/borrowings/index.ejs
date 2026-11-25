@@ -55,6 +55,8 @@
         <!--We add our buttons-->
         <!--View button for our borrower-->
         <a class="btn btn-primary" href="/borrowers/<%=borrowing.borrower.id%>">View</a>
+        <!--Our return approval button-->
+        <a class="btn btn-primary" href="/borrowings/<%=borrowing.id%>/returns">Return</a>
         <!--Then a delete button if the user wants to delete a borrowing -->
         <%-include('../partials/deleteForm', {url: `/borrowers/${borrowing.borrower.id}`})%>
     </div>

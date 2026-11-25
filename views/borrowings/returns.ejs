@@ -1,0 +1,12 @@
+<!--This page will contain our return approval page HTML code-->
+<!--Here we will create all our form fields ejs elements-->
+<h2 class="page-header">Return Approvals</h2>
+<!--We create our form that will post our approval updates to the database-->
+<form action="/borrowings/<%=borrowings.id%>?_method=PUT" method="POST">
+    <!--We do a method override since we want to update our borrowings data-->
+    <%-include('form_fields')%>
+    <div class="btn-row form-row-end">
+        <a class="btn btn-danger" href="/borrowings">Cancel</a>
+        <button class="btn btn-primary" type="submit">Return</button>
+    </div>
+</form>

@@ -60,6 +60,45 @@ router.get('/', async(req, res) =>{
     }
 } );
 
-// route that renders 
+// route that renders our return approval page
+router.get('/:id/returns', async (req, res)=>{
+    // we then have to render our return approval page 
+    try{
+        const borrowings = await Borrowing.findById(req.params.id).populate('borrower').populate('bookBorrowed').exec(); // i use find one because i want to get the borrowing as an object but not as a string. so as i can easily access its properties 
+        // we find borrowings whose status is borrowed 
+        // we then render our borrowings return page 
+        res.render('borrowings/returns', {
+            borrowings: borrowings
+        });
+    }catch{
+        res.redirect('/borrowings'); // if there is an error
+    }
+});
+
+// we create a update route that gives our return approval page functionality
+router.put('/:id', async (req, res) =>{
+    let borrowings; // a variable where we will store our borrowings that we retrieve from the database 
+    try{
+        // we retrive our borrowings that we want to update from the database 
+        borrowings = await Borrowing.findById(req.params.id).populate('borrower').populate('bookBorrowed').exec();
+        // now we do our updates
+        borrowings.dueDate = req.body.dueDate;
+        borrowings.borrowDate = req.body.borrowDate;
+        borrowings.returnDate = req.body.returnDate;
+        borrowings.status = req.body.status;
+        borrowings.approvedBy = req.body.approvedBy;
+
+        // we save our updates to the database
+        await borrowings.save();
+
+        // we redirect the person the borrowings home page 
+        res.redirect('/borrowings');
+    }catch{
+        res.render('borrowings/returns', {
+            borrowings: borrowings,
+            errorMessage: 'Error creating return approval'
+        });
+    }
+});
 // export the router 
 module.exports = router;
