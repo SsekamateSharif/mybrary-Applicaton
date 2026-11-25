@@ -8,7 +8,7 @@
         </div>
         <br>
         <div class="form-item borrowedBook-img">
-            <img class="book-img" height="400" width="300" src="<%=borrowing.bookBorrowed.coverImagePath%>">
+            <a href="/books/<%=borrowing.bookBorrowed.id%>"><img class="book-img" height="400" width="300" src="<%=borrowing.bookBorrowed.coverImagePath%>"></a>
         </div>
     </div>
 
@@ -48,6 +48,12 @@
         </div>
         <div class="info">
             Due Date: <%=borrowing.dueDate.toISOString().split('T')[0]%>
+        </div>
+        <div class="info">
+            Return Date: <%=borrowing.returnDate.toISOString().split('T')[0]%>
+        </div>
+        <div class="info">
+            Status: <%=borrowing.status%>
         </div>
     </div>
 </div>

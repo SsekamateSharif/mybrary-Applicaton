@@ -1,0 +1,62 @@
+<!--We Will create our borrowings details home page here-->
+<!--We need the title for our borrowings -->
+<h2 class="page-header">Borrowing Details</h2>
+<!--We have to iterate through the borrowed books and display them by there images and the borrowing details-->
+  <!--We need to create a form that we use to submit searches for our querries for our borrowingd in the database-->
+    <form action="/borrowings" method="GET">
+        <div class="form-row">
+            <!--First we add our inputs for the searching of the data about the borrowings from the database-->
+            <div class="form-item">
+            <label>Borrower Full Name</label>
+                <input type="text" name="fullName" value="<%=searchOptions.fullName%>">
+                <label>Borrow Date</label>
+                <input type="date" name="borrowDate" value="<%=searchOptions.borrowDate%>">
+            </div>
+            <div class="form-item">
+                <label>Due Date</label>
+                <input type="date" name="dueDate" value="<%=searchOptions.dueDate%>">
+                <label>Return Date</label>
+                <input type="date" name="returnDate" value="<%=searchOptions.returnDate%>">
+            </div>
+        </div>
+        <div class="btn-row form-row-end">
+            <!--We add our search button here-->
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+<%borrowings.forEach(borrowing => {%>
+    <div class="Borrowings-info ">
+        <!--Book Title-->
+        <div class="info">
+            <%=borrowing.bookBorrowed.title%>
+            <!--Book Image-->
+            <div class="form-item borrowedBook-img">
+                <a href="/books/<%=borrowing.bookBorrowed.id%>"><img class="book-img" height="300" width="200" src="<%=borrowing.bookBorrowed.coverImagePath%>"></a>
+            </div>
+        </div>
+        <!--Borrower's name-->
+        <div class="info">
+        Borrower Full Name: <%=borrowing.borrower.fullName%>
+        </div>
+        <div class="info">
+        Borrow Date: <%=borrowing.borrowDate.toISOString().split('T')[0]%>
+        </div>
+        <div class="info">
+            Due Date: <%=borrowing.dueDate.toISOString().split('T')[0]%>
+        </div>
+        <div class="info">
+            Return Date: <%=borrowing.returnDate.toISOString().split('T')[0]%>
+        </div>
+        <div class="info">
+            Status: <%=borrowing.status%>
+        </div>
+    </div>
+    <div class="btn-row ">
+        <!--We add our buttons-->
+        <!--View button for our borrower-->
+        <a class="btn btn-primary" href="/borrowers/<%=borrowing.borrower.id%>">View</a>
+        <!--Then a delete button if the user wants to delete a borrowing -->
+        <%-include('../partials/deleteForm', {url: `/borrowers/${borrowing.borrower.id}`})%>
+    </div>
+
+<% }) %>

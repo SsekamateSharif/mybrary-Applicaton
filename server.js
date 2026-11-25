@@ -37,6 +37,8 @@ const indexRouter = require(`./routes/index`); // import the exported router fro
 const bookRouter = require(`./routes/books`);
 // we import our borrower's router 
 const borrowerRouter = require(`./routes/borrowers`);
+// we import our borrowings router 
+const borrowingRouter = require(`./routes/borrowings`);
 // tell our app to use that router 
 app.use('/', indexRouter);  // for the main page routes 
 // tell our app to use it
@@ -45,6 +47,8 @@ app.use('/authors', authorRouter);
 app.use('/books', bookRouter);
 // we tell our app to listen to requests from our /borrowers router 
 app.use('/borrowers', borrowerRouter);
+// we tell our app to listen to the requests from our /borrowings router 
+app.use('/borrowings', borrowingRouter);
 // we make our app to listen for requests on port 3000
 app.listen(3000, () =>{console.log("server is running on port 3000.")});
 
